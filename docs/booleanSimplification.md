@@ -1,11 +1,5 @@
 # boolean simplification
 
-## how to use
-
-### aviator 实现
-
-
-
 ## 概念介绍
 
 1. 逻辑表达式: 由逻辑变量和{与,或,非} 3种运算符连接所构成的表达式。
