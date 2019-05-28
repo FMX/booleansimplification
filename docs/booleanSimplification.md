@@ -1,4 +1,4 @@
-# boolean simplification
+# boolean 化简
 
 ## 概念介绍
 
@@ -92,4 +92,8 @@ am1 am2 am3 ... amn      bg1 bg2 bg3 ... bgn   b11 b12 b13 ... b1n
 
 * `[1]`任春玲,刘晓平.矩阵化方法在布尔表达式化简中的应用`[C]`.//计算机技术及应用进展.北京:%,2004:1174-1177.
 * [Rete 算法](https://cis.temple.edu/~ingargio/cis587/readings/rete.html)
+
+---
+
+[back](./Readme.md)
   
