@@ -1,26 +1,49 @@
 grammar Aviator;
 
-math_operation
-    :
-    |math_operation (multiply='*'|devide='/'|mod='%') math_operation    #term
-    |math_operation (add='+'|substract='-') math_operation              #expr
+parse:
+    statement;
+
+// avitor 语句
+statement:
+    expression (';'expression)*
+;
+
+// aviator 表达式
+expression
+    : primary #factor
+    | prefix=('~'|'!'|'-') expression #unary
+    | expression op=('*'|'/'|'%') expression#term
+    | expression op=('+'|'-') expression #expr
+    | expression op=('<<' | '>>>' | '>>') expression#shift
+    | expression op=('<'|'>'|'<='|'>=') expression #rel
+    | expression op=('=='|'=~'| '!=') expression #equality
+    | expression op='&' expression #bitAnd
+    | expression op='^' expression #xor
+    | expression op='|' expression #bitOr
+    | expression op='&&' expression #and
+    | expression op='||' expression #join
+    | expression op='?' expression ':' expression #ternary
     ;
 
-
-/*********** lexer *************/
-
-DIGITS
-    : DIGIT+
+primary
+    :'(' expression ')'
+    | functionExpression
+    | lambdaExpression
     ;
 
-
-// white space, aviator not support \n in expression
-WHITESPACES
-    : [ \t\r] -> channel(HIDDEN)
+// 方法
+functionExpression: functionName '(' expressionList?')'
     ;
 
+functionName:
+    ;
 
-AND: '&';
-JOIN: '|';
+// 参数列表
+expressionList
+    : expression (',' expression)*
+    ;
 
-fragment DIGIT : [0-9];
+//lambda
+lambdaExpression:
+
+    ;
