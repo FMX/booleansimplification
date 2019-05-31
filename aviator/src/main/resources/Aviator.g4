@@ -11,6 +11,7 @@ statement:
 // aviator 表达式
 expression
     : primary #factor
+    | expression '[' expression ']' # arrayAccess
     | prefix=('~'|'!'|'-') expression #unary
     | expression op=('*'|'/'|'%') expression#term
     | expression op=('+'|'-') expression #expr
@@ -23,6 +24,7 @@ expression
     | expression op='&&' expression #and
     | expression op='||' expression #join
     | expression op='?' expression ':' expression #ternary
+    | IDENTIFIER '=' expression #assign
     ;
 
 primary
@@ -32,18 +34,21 @@ primary
     ;
 
 // 方法
-functionExpression: functionName '(' expressionList?')'
-    ;
+functionExpression: functionName '(' expressionList?')' ;
 
-functionName:
-    ;
+functionName: IDENTIFIER ;
 
 // 参数列表
-expressionList
-    : expression (',' expression)*
-    ;
+expressionList : expression (',' expression)* ;
 
 //lambda
-lambdaExpression:
-
+lambdaExpression :lambdaParameters '->' lambdaBody  ('(' expressionList')')+ ;
+lambdaParameters
+    : IDENTIFIER
+    | '(' IDENTIFIER (',' IDENTIFIER)* ')'
     ;
+lambdaBody : expression 'end' ;
+
+
+// java identifier
+IDENTIFIER:;
