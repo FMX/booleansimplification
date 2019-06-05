@@ -30,6 +30,7 @@ public class BooleanMatrixSimplificatorTest {
         StringBuilder sb = new StringBuilder();
         for (int i = 0;i<booleanMatrix.size();i++) {
             List<AbstractBooleanExpression> list= booleanMatrix.get(i);
+            sb.append("(");
             for (int j=0;j<list.size();j++) {
                 sb.append(list.get(j).print());
                 if(j== list.size()-1){
@@ -38,6 +39,7 @@ public class BooleanMatrixSimplificatorTest {
                     sb.append(" and ");
                 }
             }
+            sb.append(")");
             if(i == booleanMatrix.size()-1){
 
             }else {
